@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KubeWeb</title>
+    <link rel="stylesheet" href="k8s.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  </head>
+
+  <script>
+    function cmd() {
+      console.log("hyy");
+    var i = document.getElementById("in1").value
+
+    var xhr = new XMLHttpRequest()
+
+	    xhr.open("GET", "http://{{hostvars[inventory_hostname].inventory_hostname}}/cgi-bin/k8s.py?x=" + i, true);
+
+    xhr.send()
+
+    xhr.onload = function() {
+        var output = xhr.responseText;
+        document.getElementById("d1").innerHTML = output;
+    }
+}
+</script>
+
+<body>
+     <nav>
+        <div class="logo">
+         <h1>KubeWeb</h1>
+        </div>
+        <div class="menu">
+          <a href="#">Home</a>
+          <a href="#">Contact</a>
+          <a href="#">About</a>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="search_wrap search_wrap_6">
+          <div class="search_box">
+            <input id="in1" type="text" class="input" placeholder="Enter Your Requirement ">
+            <div class="btn" onclick="cmd()">
+              <h4>RUN</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+        <div id="d1"></div>
+</body>
